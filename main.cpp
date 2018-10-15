@@ -203,7 +203,7 @@ int main() {
 				else {
 					bool isFound = false;
 					for (int i = 0; i < max_shapes; i++) {
-						if (shapesArray[i]->getName() == in_name) {
+						if (shapesArray[i] != nullptr && shapesArray[i]->getName() == in_name) {
 							isFound = true;
 
 							if (lineStream.eof()) {
@@ -233,8 +233,6 @@ int main() {
 								}
 
 							}
-
-
 							break;
 						}
 					}
@@ -257,7 +255,7 @@ int main() {
 				else {
 					bool isFound = false;
 					for (int i = 0; i < max_shapes; i++) {
-						if (shapesArray[i]->getName() == in_name) {
+						if (shapesArray[i] != nullptr && shapesArray[i]->getName() == in_name) {
 							isFound = true;
 
 							if (lineStream.eof()) {
@@ -314,7 +312,7 @@ int main() {
 						bool isFound = false;
 
 						for (int i = 0; i < max_shapes; i++) {
-							if (shapesArray[i]->getName() == in_name) {
+							if (shapesArray[i] != nullptr && shapesArray[i]->getName() == in_name) {
 								isFound = true;
 								cout << "Drew" << in_name << endl;
 								shapesArray[i]->draw();
