@@ -167,7 +167,7 @@ int main() {
 																}
 																else {
 																	shapesArray[shapeCount++] = new shape(in_name, in_type, ints[0], ints[1], ints[2], ints[3]);
-																	cout << "Created " << in_name << " " << in_type << " " << ints[0] << " " << ints[1]
+																	cout << "Created " << in_name << ": " << in_type << " " << ints[0] << " " << ints[1]
 																		<< " " << ints[2] << " " << ints[3] << endl;
 																	shapeCount++;
 																}
@@ -207,22 +207,22 @@ int main() {
 							isFound = true;
 
 							if (lineStream.eof()) {
-								cout << "Error: " << errors[8] << endl;
+								cout << "Error: " << errors[8] << " 1" << endl;
 							}
 							else {
 								lineStream >> ints[0];
 								if (lineStream.fail()) {
 									cout << "Error: " << errors[1] << endl;
 								}
-								else if (!lineStream.eof()) {
-									cout << "Error: " << errors[8] << endl;
+								else if (lineStream.eof()) {
+									cout << "Error: " << errors[8] << " 2" << endl;
 								}
 								else {
 									lineStream >> ints[1];
 									if (lineStream.fail()) {
 										cout << "Error: " << errors[1] << endl;
 									}
-									else if (lineStream.eof()) {
+									else if (!lineStream.eof()) {
 										cout << "Error: " << errors[7] << endl;
 									}
 									else {
@@ -344,26 +344,27 @@ int main() {
 					if (in_name == keyWordsList[0]) {
 						cout << "Deleted all shapes" << endl;
 						for (int i = 0; i < max_shapes; i++)
-							if (shapesArray[i] != nullptr)
+							if (shapesArray[i] != nullptr) {
 								delete shapesArray[i];
-
-
-
+								shapesArray[i] = nullptr;
+								shapeCount--;
+							}
 					}
 					else {
-						bool isFound;
+						bool isFound = false;
 
 						for (int i = 0; i < max_shapes; i++) {
-							if (shapesArray[i]->getName() == in_name) {
-								isFound = false;
+							if (shapesArray[i] != nullptr && shapesArray[i]->getName() == in_name) {
+								isFound = true;
 								delete shapesArray[i];
-
+								shapeCount--;
+								shapesArray[i] = nullptr;
 								break;
 							}
 						}
 
 						if (!isFound) {
-							cout << "Error: shape " << in_name << " " << errors[4];
+							cout << "Error: shape " << in_name << " " << errors[4] << endl;
 						}
 					}
 				}
