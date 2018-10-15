@@ -285,7 +285,7 @@ int main() {
 						}
 					}
 					if (!isFound) {
-						cout << "Error: shape " << in_name << " " << errors[4];
+						cout << "Error: shape " << in_name << " " << errors[4] << endl;
 					}
 				}
 			}
@@ -316,6 +316,7 @@ int main() {
 						for (int i = 0; i < max_shapes; i++) {
 							if (shapesArray[i]->getName() == in_name) {
 								isFound = true;
+								cout << "Drew" << in_name << endl;
 								shapesArray[i]->draw();
 
 								break;
@@ -371,7 +372,7 @@ int main() {
 			}
 		}
 		else {
-			cout << "Error: " << errors[0];
+			cout << "Error: " << errors[0] << endl;
 		}
 
 
