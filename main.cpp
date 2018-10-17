@@ -383,9 +383,10 @@ int main() {
 						bool isFound = false;
 						for (int i = 0; i < max_shapes; i++) {
 							if (shapesArray[i] != nullptr && shapesArray[i]->getName() == in_name) {
+								isFound = true;
 								if (!lineStream.eof()) {
 									cout << "Error: " << errors[7] << endl;
-									isFound = true;
+									
 								}
 								else {
 									cout << "Deleted shape " << in_name << endl;
