@@ -73,7 +73,7 @@ int main() {
 					cout << "Error: " << errors[8] << endl;
 				}
 				else if (max_shapes < 0) {
-					cout << "Error: " << errors[1] << endl;
+					cout << "Error: " << errors[6] << endl;
 				}else{
 					shapesArray = new shape*[max_shapes];
 					for (int i = 0; i < max_shapes; i++)
@@ -89,101 +89,112 @@ int main() {
 			}
 			else {
 				lineStream >> in_name;
-				if (lineStream.eof()) {
+				
+			
+				bool isInvalid = false;
+				bool isUsed = false;
+				for (string s : keyWordsList) {
+					if (s == in_name)
+						isInvalid = true;
+				}
+				for (string s : shapeTypesList) {
+					if (s == in_name)
+						isInvalid = true;
+				}
+
+				for (int i = 0; i < max_shapes; i++) {
+					if (shapesArray[i] != nullptr && shapesArray[i]->getName() == in_name) {
+						isUsed = true;
+					}
+				}
+
+				if (isInvalid) {
+					cout << "Error: " << errors[2] << endl;
+				}
+				else if (isUsed) {
+					cout << "Error: shape " << in_name << " " << errors[3] << endl;
+				}
+				else if (lineStream.eof()) {
 					cout << "Error: " << errors[8] << endl;
 
 				}
 				else {
-					bool isInvalid = false;
-					bool isUsed = false;
-					for (string s : keyWordsList) {
-						if (s == in_name)
-							isInvalid = true;
-					}
-					for (string s : shapeTypesList) {
-						if (s == in_name)
-							isInvalid = true;
-					}
 
-					for (int i = 0; i < max_shapes; i++) {
-						if (shapesArray[i] != nullptr && shapesArray[i]->getName() == in_name) {
-							isUsed = true;
-						}
-					}
+					lineStream >> in_type;
+					if (in_type != shapeTypesList[0] &&
+						in_type != shapeTypesList[1] &&
+						in_type != shapeTypesList[2]) {
 
-					if (isInvalid) {
-						cout << "Error: " << errors[2] << endl;
-					}
-					else if (isUsed) {
-						cout << "Error: shape " << in_name << " " << errors[3] << endl;
+						cout << "Error: " << errors[5] << endl;
 					}
 					else {
-
-						lineStream >> in_type;
-						if (in_type != shapeTypesList[0] &&
-							in_type != shapeTypesList[1] &&
-							in_type != shapeTypesList[2]) {
-
-							cout << "Error: " << errors[5] << endl;
+						if (lineStream.eof()) {
+							cout << "Error: " << errors[8] << endl;
 						}
 						else {
-							if (lineStream.eof()) {
-								cout << "Error: " << errors[8] << endl;
+							lineStream >> ints[0];
+							if (lineStream.fail()) {
+								cout << "Error: " << errors[1] << endl;
 							}
-							else {
-								lineStream >> ints[0];
-								if (lineStream.fail() || ints[0] < 0) {
-									cout << "Error: " << errors[1] << endl;
+							else if(ints[0] < 0){
+								cout << "Error: " << errors[6] << endl;
+
+							}	
+							else{
+								if (lineStream.eof()) {
+									cout << "Error: " << errors[8] << endl;
 								}
-								
-								else{
-									if (lineStream.eof()) {
-										cout << "Error: " << errors[8] << endl;
+								else {
+									lineStream >> ints[1];
+									if (lineStream.fail() ) {
+										cout << "Error: " << errors[1] << endl;
+									}
+									else if(ints[1] < 0){
+										cout << "Error: " << errors[6] << endl;
+
 									}
 									else {
-										lineStream >> ints[1];
-										if (lineStream.fail() || ints[1] < 0) {
-											cout << "Error: " << errors[1] << endl;
+										if (lineStream.eof()) {
+											cout << "Error: " << errors[8] << endl;
 										}
-										
 										else {
-											if (lineStream.eof()) {
-												cout << "Error: " << errors[8] << endl;
+											lineStream >> ints[2];
+											if (lineStream.fail()) {
+												cout << "Error: " << errors[1] << endl;
+											}
+											else if (ints[2] < 0){
+												cout << "Error: " << errors[6] << endl;	
+											}
+											else if (lineStream.eof()) {
+													cout << "Error: " << errors[8] << endl;
 											}
 											else {
-												lineStream >> ints[2];
-												if (lineStream.fail() || ints[2] < 0) {
+												lineStream >> ints[3];
+												if (lineStream.fail()) {
 													cout << "Error: " << errors[1] << endl;
+												}
+												else if(ints[3] < 0){
+													cout << "Error: " << errors[6] << endl;
 												}
 												else {
 													if (lineStream.eof()) {
-														cout << "Error: " << errors[8] << endl;
-													}
-													else {
-														lineStream >> ints[3];
-														if (lineStream.fail() || || ints[3] < 0) {
-															cout << "Error: " << errors[1] << endl;
+														if (shapeCount >= max_shapes) {
+															cout << "Error: " << errors[9] << endl;
 														}
 														else {
-															if (lineStream.eof()) {
-																if (shapeCount >= max_shapes) {
-																	cout << "Error: " << errors[9] << endl;
-																}
-																else {
-																	shapesArray[shapeCount++] = new shape(in_name, in_type, ints[0], ints[1], ints[2], ints[3]);
-																	cout << "Created " << in_name << ": " << in_type << " " << ints[0] << " " << ints[1]
-																		<< " " << ints[2] << " " << ints[3] << endl;
-																	shapeCount++;
-																}
-															}
-															else {
-																cout << "Error: " << errors[7] << endl;
-															}
-
+															shapesArray[shapeCount] = new shape(in_name, in_type, ints[0], ints[1], ints[2], ints[3]);
+															cout << "Created " << in_name << ": " << in_type << " " << ints[0] << " " << ints[1]
+																<< " " << ints[2] << " " << ints[3] << endl;
+															shapeCount++;
 														}
-
 													}
+													else {
+														cout << "Error: " << errors[7] << endl;
+													}
+
 												}
+
+
 											}
 										}
 									}
@@ -191,6 +202,7 @@ int main() {
 							}
 						}
 					}
+
 				}
 			}
 		}
@@ -215,23 +227,29 @@ int main() {
 							}
 							else {
 								lineStream >> ints[0];
-								if (lineStream.fail() || ints[0] < 0) {
+								if (lineStream.fail()) {
 									cout << "Error: " << errors[1] << endl;
+								} 
+								else if(ints[0] < 0){
+									cout << "Error: " << errors[6] << endl;
 								}
 								else if (lineStream.eof()) {
 									cout << "Error: " << errors[8] << " 2" << endl;
 								}
 								else {
 									lineStream >> ints[1];
-									if (lineStream.fail() || ints[1] < 0) {
+									if (lineStream.fail()) {
 										cout << "Error: " << errors[1] << endl;
+									}
+									else if(ints[1] < 0 ){
+										cout << "Error: " << errors[6] << endl;
 									}
 									else if (!lineStream.eof()) {
 										cout << "Error: " << errors[7] << endl;
 									}
 									else {
 										shapesArray[i]->setXlocation(ints[0]);
-										shapesArray[i]->setXlocation(ints[1]);
+										shapesArray[i]->setYlocation(ints[1]);
 										cout << "Moved " << shapesArray[i]->getName() << " to " << ints[0] << " " << ints[1] << endl;
 									}
 								}
@@ -268,8 +286,11 @@ int main() {
 							else {
 
 								lineStream >> ints[4];
-								if (lineStream.fail() || ints[4] < 0) {
+								if (lineStream.fail()) {
 									cout << "Error: " << errors[1] << endl;
+								}
+								else if(ints[4] < 0 || ints[4] > 360){
+									cout << "Error: " << errors[6] << endl;
 								}
 								else if (lineStream.eof()) {
 									cout << "Error: " << errors[7] << endl;
@@ -318,7 +339,7 @@ int main() {
 						for (int i = 0; i < max_shapes; i++) {
 							if (shapesArray[i] != nullptr && shapesArray[i]->getName() == in_name) {
 								isFound = true;
-								cout << "Drew" << in_name << endl;
+								cout << "Drew " << in_name << endl;
 								shapesArray[i]->draw();
 
 								break;
@@ -326,7 +347,7 @@ int main() {
 						}
 
 						if (!isFound) {
-							cout << "Error: shape " << in_name << " " << errors[4];
+							cout << "Error: shape " << in_name << " " << errors[4] << endl;
 						}
 					}
 				}
@@ -345,7 +366,7 @@ int main() {
 				}
 				else {
 					if (in_name == keyWordsList[0]) {
-						cout << "Deleted all shapes" << endl;
+						cout << "Deleted: all shapes" << endl;
 						for (int i = 0; i < max_shapes; i++)
 							if (shapesArray[i] != nullptr) {
 								delete shapesArray[i];
@@ -358,6 +379,7 @@ int main() {
 
 						for (int i = 0; i < max_shapes; i++) {
 							if (shapesArray[i] != nullptr && shapesArray[i]->getName() == in_name) {
+								cout<< "Deleted shape " << in_name <<endl;
 								isFound = true;
 								delete shapesArray[i];
 								shapeCount--;
