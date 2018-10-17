@@ -315,10 +315,7 @@ int main() {
 			}
 			else {
 				lineStream >> in_name;
-				if (!lineStream.eof()) {
-					cout << "Error: " << errors[7] << endl;
-				}
-				else {
+			
 					if (in_name == keyWordsList[0]) {
 						cout << "Drew all shapes" << endl;
 						for (int i = 0; i < max_shapes; i++)
@@ -334,9 +331,13 @@ int main() {
 						for (int i = 0; i < max_shapes; i++) {
 							if (shapesArray[i] != nullptr && shapesArray[i]->getName() == in_name) {
 								isFound = true;
-								cout << "Drew " << in_name << endl;
-								shapesArray[i]->draw();
-
+								if (!lineStream.eof()) {
+									cout << "Error: " << errors[7] << endl;
+								}
+								else {
+									cout << "Drew " << in_name << endl;
+									shapesArray[i]->draw();
+								}
 								break;
 							}
 						}
@@ -345,7 +346,7 @@ int main() {
 							cout << "Error: shape " << in_name << " " << errors[4] << endl;
 						}
 					}
-				}
+				
 			}
 		}
 		else if (command == keyWordsList[6]) { //delete
@@ -356,30 +357,38 @@ int main() {
 			}
 			else {
 				lineStream >> in_name;
-				if (!lineStream.eof()) {
-					cout << "Error: " << errors[7] << endl;
-				}
-				else {
+			
+				
 					if (in_name == keyWordsList[0]) {
 						cout << "Deleted: all shapes" << endl;
 						for (int i = 0; i < max_shapes; i++)
 							if (shapesArray[i] != nullptr) {
-								delete shapesArray[i];
-								shapesArray[i] = nullptr;
-								shapeCount--;
+								if (!lineStream.eof()) {
+									cout << "Error: " << errors[7] << endl;
+								}
+								else {
+									delete shapesArray[i];
+									shapesArray[i] = nullptr;
+									shapeCount--;
+								}
 							}
 					}
 					else {
 						bool isFound = false;
-
 						for (int i = 0; i < max_shapes; i++) {
 							if (shapesArray[i] != nullptr && shapesArray[i]->getName() == in_name) {
-								cout<< "Deleted shape " << in_name <<endl;
-								isFound = true;
-								delete shapesArray[i];
-								shapeCount--;
-								shapesArray[i] = nullptr;
-								break;
+								if (!lineStream.eof()) {
+									cout << "Error: " << errors[7] << endl;
+									isFound = true;
+								}
+								else {
+									cout << "Deleted shape " << in_name << endl;
+									
+									delete shapesArray[i];
+									shapeCount--;
+									shapesArray[i] = nullptr;
+									break;
+								}
 							}
 						}
 
@@ -387,7 +396,7 @@ int main() {
 							cout << "Error: shape " << in_name << " " << errors[4] << endl;
 						}
 					}
-				}
+				
 			}
 		}
 		else {
