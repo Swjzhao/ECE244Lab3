@@ -135,7 +135,7 @@ int main() {
 						else {
 							lineStream >> ints[0];
 							if (lineStream.fail()) {
-								cout << "Error: " << errors[1] << endl;
+								cout << "Error: 0 " << errors[1] << endl;
 							}
 							else if(ints[0] < 0){
 								cout << "Error: " << errors[6] << endl;
@@ -148,7 +148,7 @@ int main() {
 								else {
 									lineStream >> ints[1];
 									if (lineStream.fail() ) {
-										cout << "Error: " << errors[1] << endl;
+										cout << "Error: 1 " << errors[1] << endl;
 									}
 									else if(ints[1] < 0){
 										cout << "Error: " << errors[6] << endl;
@@ -161,7 +161,7 @@ int main() {
 										else {
 											lineStream >> ints[2];
 											if (lineStream.fail()) {
-												cout << "Error: " << errors[1] << endl;
+												cout << "Error: 2" << errors[1] << endl;
 											}
 											else if (ints[2] < 0){
 												cout << "Error: " << errors[6] << endl;	
@@ -172,7 +172,7 @@ int main() {
 											else {
 												lineStream >> ints[3];
 												if (lineStream.fail()) {
-													cout << "Error: " << errors[1] << endl;
+													cout << "Error: 3" << errors[1] << endl;
 												}
 												else if(ints[3] < 0){
 													cout << "Error: " << errors[6] << endl;
