@@ -269,10 +269,7 @@ int main() {
 			}
 			else {
 				lineStream >> in_name;
-				if (lineStream.eof()) {
-					cout << "Error: " << errors[8] << endl;
-				}
-				else {
+				
 					bool isFound = false;
 					for (int i = 0; i < max_shapes; i++) {
 						if (shapesArray[i] != nullptr && shapesArray[i]->getName() == in_name) {
@@ -308,7 +305,7 @@ int main() {
 					if (!isFound) {
 						cout << "Error: shape " << in_name << " " << errors[4] << endl;
 					}
-				}
+				
 			}
 		}
 		else if (command == keyWordsList[5]) { //draw
