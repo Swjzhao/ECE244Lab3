@@ -317,12 +317,15 @@ int main() {
 				lineStream >> in_name;
 			
 					if (in_name == keyWordsList[0]) {
-						cout << "Drew all shapes" << endl;
-						for (int i = 0; i < max_shapes; i++)
-							if (shapesArray[i] != nullptr)
-								shapesArray[i]->draw();
-
-
+						if (!lineStream.eof()) {
+							cout << "Error: " << errors[7] << endl;
+						}
+						else {
+							cout << "Drew all shapes" << endl;
+							for (int i = 0; i < max_shapes; i++)
+								if (shapesArray[i] != nullptr)
+									shapesArray[i]->draw();
+						}
 
 					}
 					else {
@@ -360,18 +363,21 @@ int main() {
 			
 				
 					if (in_name == keyWordsList[0]) {
-						cout << "Deleted: all shapes" << endl;
-						for (int i = 0; i < max_shapes; i++)
-							if (shapesArray[i] != nullptr) {
-								if (!lineStream.eof()) {
-									cout << "Error: " << errors[7] << endl;
-								}
-								else {
+						if (!lineStream.eof()) {
+							cout << "Error: " << errors[7] << endl;
+						}
+						else {
+							cout << "Deleted: all shapes" << endl;
+							for (int i = 0; i < max_shapes; i++)
+								if (shapesArray[i] != nullptr) {
+
+
 									delete shapesArray[i];
 									shapesArray[i] = nullptr;
 									shapeCount--;
+
 								}
-							}
+						}
 					}
 					else {
 						bool isFound = false;
