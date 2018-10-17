@@ -72,7 +72,9 @@ int main() {
 				else if (!lineStream.eof()) {
 					cout << "Error: " << errors[8] << endl;
 				}
-				else {
+				else if (max_shapes < 0) {
+					cout << "Error: " << errors[1] << endl;
+				}else{
 					shapesArray = new shape*[max_shapes];
 					for (int i = 0; i < max_shapes; i++)
 						shapesArray[i] = nullptr;
@@ -130,25 +132,27 @@ int main() {
 							}
 							else {
 								lineStream >> ints[0];
-								if (lineStream.fail()) {
+								if (lineStream.fail() || ints[0] < 0) {
 									cout << "Error: " << errors[1] << endl;
 								}
-								else {
+								
+								else{
 									if (lineStream.eof()) {
 										cout << "Error: " << errors[8] << endl;
 									}
 									else {
 										lineStream >> ints[1];
-										if (lineStream.fail()) {
+										if (lineStream.fail() || ints[1] < 0) {
 											cout << "Error: " << errors[1] << endl;
 										}
+										
 										else {
 											if (lineStream.eof()) {
 												cout << "Error: " << errors[8] << endl;
 											}
 											else {
 												lineStream >> ints[2];
-												if (lineStream.fail()) {
+												if (lineStream.fail() || ints[2] < 0) {
 													cout << "Error: " << errors[1] << endl;
 												}
 												else {
@@ -157,7 +161,7 @@ int main() {
 													}
 													else {
 														lineStream >> ints[3];
-														if (lineStream.fail()) {
+														if (lineStream.fail() || || ints[3] < 0) {
 															cout << "Error: " << errors[1] << endl;
 														}
 														else {
@@ -211,7 +215,7 @@ int main() {
 							}
 							else {
 								lineStream >> ints[0];
-								if (lineStream.fail()) {
+								if (lineStream.fail() || ints[0] < 0) {
 									cout << "Error: " << errors[1] << endl;
 								}
 								else if (lineStream.eof()) {
@@ -219,7 +223,7 @@ int main() {
 								}
 								else {
 									lineStream >> ints[1];
-									if (lineStream.fail()) {
+									if (lineStream.fail() || ints[1] < 0) {
 										cout << "Error: " << errors[1] << endl;
 									}
 									else if (!lineStream.eof()) {
@@ -264,7 +268,7 @@ int main() {
 							else {
 
 								lineStream >> ints[4];
-								if (lineStream.fail()) {
+								if (lineStream.fail() || ints[4] < 0) {
 									cout << "Error: " << errors[1] << endl;
 								}
 								else if (lineStream.eof()) {
