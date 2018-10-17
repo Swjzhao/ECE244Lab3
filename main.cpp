@@ -28,7 +28,7 @@ int max_shapes;
 // ECE244 Student: you may want to add the prototype of
 // helper functions you write here
 
-
+//trim trailing white spaces
 string trim(string &str) {
 
 	int end = str.find_last_not_of(" ");
@@ -44,9 +44,7 @@ int main() {
 	string in_name;
 	string in_type;
 
-	int ints[5];
-
-	//loc loc size size angle
+	int ints[5] = {0,0,0,0,0}; //loc loc size size angle
 
 	string errors[] = { "invalid command", "invalid argument", "invalid shape name", "exists" ,
 		"not found", "invalid shape type", "invalid value" , "too many arguments", "too few arguments",
